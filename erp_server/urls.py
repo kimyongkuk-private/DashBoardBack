@@ -18,9 +18,15 @@ from django.urls import path,include
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework_jwt.views import verify_jwt_token
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Pastenvin API')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('rest-api/', include('rest_framework.urls')),
+    path('rest-swagger/', schema_view),
+    
     path('rest-auth/', include('rest_auth.urls')),
     path('api-token-auth/', obtain_jwt_token),
     path('api-token-refresh/', refresh_jwt_token),
